@@ -1,7 +1,8 @@
-//未定义CIRCLE_H则执行其中的代码
-#ifndef CIRCLE_H
-#define CIRCLE_H//定义CIRCLE_H
+//未定义TESTSTACK_H则执行其中的代码
+#ifndef TESTSTACK_H
+#define TESTSTACK_H//定义TESTSTACK_H
 
+#include "D:/code/test1/test1/Structure_Share.h"
 namespace tsetstack {
 
 	//所有类型命名,例如类, 结构体, 类型定义 (typedef), 枚举, 类型模板参数
@@ -9,6 +10,7 @@ namespace tsetstack {
 
 	//尽量使用using代替typedef
 	using StackEntry = int;//栈的元素类型
+	using StructureShare::Node;
 
 	//顺序实现
 	class Stack {		
@@ -33,31 +35,7 @@ namespace tsetstack {
 		static constexpr int stack_size=3;
 		StackEntry entry[stack_size];
 	};
-
-	//链式节点
-	template<typename NodeEntry>
-	//仅当只有数据成员时使用 struct
-	struct Node {
-		NodeEntry entry;
-		Node<NodeEntry> *next;
-		Node();
-		Node(NodeEntry item, Node<NodeEntry> *add_on = NULL);
-	};
-	//由于编译器在实例化模板时需要掌握定义
-	//当模板类的定义和声明建议一起放在头文件时，在另外的.cpp文件使用时只需要include对应的.h文件
-	//如果定义放在.cpp文件中，使用时需要include对应的.cpp文件
-	//栈式实现
-	template<typename NodeEntry>
-	Node<NodeEntry>::Node()
-	{
-		next = nullptr;
-	}
-	template<typename NodeEntry>
-	Node<NodeEntry>::Node(NodeEntry item, Node* add_on)
-	{
-		entry = item;
-		next = add_on;
-	}
+	
 	//链栈
 	template<typename StackEntry>
 	class NodeStack {
